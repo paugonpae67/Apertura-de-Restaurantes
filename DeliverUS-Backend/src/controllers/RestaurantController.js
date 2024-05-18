@@ -10,7 +10,7 @@ const index = async function (req, res) {
         model: RestaurantCategory,
         as: 'restaurantCategory'
       },
-        order: [['status', 'ASC'], [{ model: RestaurantCategory, as: 'restaurantCategory' }, 'name', 'ASC']]
+        order: [[{ model: RestaurantCategory, as: 'restaurantCategory' }, 'name', 'ASC']]
       }
     )
     res.json(restaurants)
@@ -98,7 +98,7 @@ const destroy = async function (req, res) {
 
 const changeStatus = async function (req, res) {
   try {
-    const restaurant = Restaurant.findByPk(req.params.restaurantId)
+    const restaurant = await Restaurant.findByPk(req.params.restaurantId)
     if (restaurant.status === 'online') {
       restaurant.status = 'offline'
     } else {

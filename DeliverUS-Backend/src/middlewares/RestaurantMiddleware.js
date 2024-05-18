@@ -27,7 +27,7 @@ const restaurantHasNoOrders = async (req, res, next) => {
 
 const checkNoOrderNull = async (req, res, next) => {
   try {
-    const orders = Order.findOne({
+    const orders = await Order.findOne({
       where: { restaurantId: req.params.restaurantId, deliveredAt: null }
     })
     if (orders === null) {
